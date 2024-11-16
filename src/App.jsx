@@ -1,11 +1,11 @@
-import TheHeader from "./components/TheHeader.jsx";
-import TheMain from "./components/TheMain.jsx";
+import Header from "./components/Header.jsx";
+import Main from "./components/Main.jsx";
 
 const App = () => {
     return (
         <div className="container">
-            <TheHeader />
-            <TheMain />
+            <Header />
+            <Main />
         </div>
     );
 }

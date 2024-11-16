@@ -4,6 +4,21 @@ body, html {
     font-family: Arial, sans-serif;
     height: 100%;
 }
+.version {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #043458;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 4px;
+    z-index: 2147483647;
+}
 .container {
     display: flex;
     flex-direction: column;
