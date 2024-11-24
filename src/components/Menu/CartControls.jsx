@@ -1,23 +1,14 @@
 import Button from "../Button.jsx";
 import { useState } from "react";
 
-const CartControls = () => {
-    const [isCounter, setIsCounter] = useState(false);
-
-    const [counter, setCounter] = useState(1);
-
-    const decreasingNumberPizzas = (event) => {
-        event.preventDefault();
-        setCounter(counter - 1);
-    }
-    const increasingNumberPizzas = (event) => {
-        event.preventDefault();
-        setCounter(counter + 1);
-    }
-    const showNumberPizzas = (event) => {
-        event.preventDefault();
-        setIsCounter(!isCounter);
-    }
+const CartControls = ({ params }) => {
+    const {
+        isCounter,
+        counter,
+        showNumberPizzas,
+        decreasingNumberPizzas,
+        increasingNumberPizzas,
+    } = params;
 
     return (
         <div className="cart-controls">
