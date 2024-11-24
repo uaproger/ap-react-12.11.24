@@ -1,6 +1,6 @@
 import { ucfirst } from "../../helpers/helper.js";
 import Image from "../Image.jsx";
-import Button from "../Button.jsx";
+import CartControls from "./CartControls.jsx";
 
 const ItemMenu = ({ pizza }) => {
     const { imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
@@ -11,15 +11,18 @@ const ItemMenu = ({ pizza }) => {
                 imageUrl,
                 name,
                 className: "pizza-image"
-            }} />
+            }}/>
             <div className="pizza-info">
-                <h2>{ name }</h2>
+                <h2>{name}</h2>
                 <p className="ingredients">
-                    { ingredients.map(ingredient => ucfirst(ingredient)).join(', ') }
+                    {ingredients.map(ingredient => ucfirst(ingredient)).join(', ')}
                 </p>
-                <p className={ soldOut ? "sold-out" : "price" }>€{ unitPrice.toFixed(2) }</p>
+                {soldOut
+                    ? (<p className={"sold-out"}>SOLD OUT</p>)
+                    : (<p className={"price"}>€{unitPrice.toFixed(2)}</p>)
+                }
             </div>
-            { !soldOut && (<Button className={"add-to-cart"} text={"ADD TO CART"} />) }
+            {!soldOut && (<CartControls />)}
         </div>
     );
 }

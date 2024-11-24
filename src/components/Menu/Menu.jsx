@@ -1,5 +1,6 @@
 import { pizzas } from "../../config/data.js";
 import ItemMenu from "./ItemMenu.jsx";
+import "./Menu.css";
 
 const Menu = () => {
     return (
