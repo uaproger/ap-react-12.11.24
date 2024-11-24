@@ -6,13 +6,16 @@ const CartControls = () => {
 
     const [counter, setCounter] = useState(1);
 
-    const decreasingNumberPizzas = () => {
+    const decreasingNumberPizzas = (event) => {
+        event.preventDefault();
         setCounter(counter - 1);
     }
-    const increasingNumberPizzas = () => {
+    const increasingNumberPizzas = (event) => {
+        event.preventDefault();
         setCounter(counter + 1);
     }
-    const showNumberPizzas = () => {
+    const showNumberPizzas = (event) => {
+        event.preventDefault();
         setIsCounter(!isCounter);
     }
 
