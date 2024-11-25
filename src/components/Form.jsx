@@ -1,7 +1,7 @@
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
 import Menu from "./Menu/Menu.jsx";
-import {useState} from "react";
+import { useState } from "react";
 
 const Form = () => {
     const [userName, setUserName] = useState("");
@@ -18,8 +18,8 @@ const Form = () => {
 
     return (
         <form action={"/"} method={"post"} className={"form"}>
-            <Input onChange={changeUserName} type={"text"} placeholder={"Ваше ім'я"} ariaLabel={"Ваше ім'я"} value={ userName } />
-            <Button onClick={showUserName} text={"Start Order"} className={"btn"} />
+            <Input onChange={ changeUserName } type={"text"} placeholder={"Ваше ім'я"} ariaLabel={"Ваше ім'я"} value={ userName } />
+            <Button onClick={ showUserName } text={"Start Order"} className={"btn"} />
             <Menu />
         </form>
     );

@@ -1,9 +1,9 @@
-import { ucfirst } from "../../helpers/helper.js";
+import { setPrice, ucfirst } from "../../helpers/helper.js";
 import Image from "../Image.jsx";
 import CartControls from "./CartControls.jsx";
-import {useState} from "react";
+import { useState } from "react";
 
-const ItemMenu = ({ pizza, params }) => {
+const ItemMenu = ({ pizza }) => {
     const { imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
 
     const [isCounter, setIsCounter] = useState(false);
@@ -37,7 +37,7 @@ const ItemMenu = ({ pizza, params }) => {
                 </p>
                 {soldOut
                     ? (<p className={"sold-out"}>SOLD OUT</p>)
-                    : (<p className={"price"}>€{unitPrice.toFixed(2)}</p>)
+                    : (<p className={"price"}>{setPrice(unitPrice)}</p>)
                 }
             </div>
             {!soldOut && (<CartControls params={{
