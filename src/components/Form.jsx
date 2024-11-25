@@ -3,7 +3,7 @@ import Button from "./Button.jsx";
 import Menu from "./Menu/Menu.jsx";
 import { useState } from "react";
 
-const Form = ({ counterParams }) => {
+const Form = () => {
     const [userName, setUserName] = useState("");
 
     const changeUserName = (event) => {
@@ -20,7 +20,7 @@ const Form = ({ counterParams }) => {
         <form action={"/"} method={"post"} className={"form"}>
             <Input onChange={ changeUserName } type={"text"} placeholder={"Ваше ім'я"} ariaLabel={"Ваше ім'я"} value={ userName } />
             <Button onClick={ showUserName } text={"Start Order"} className={"btn"} />
-            <Menu counterParams={ counterParams } />
+            <Menu />
         </form>
     );
 }
