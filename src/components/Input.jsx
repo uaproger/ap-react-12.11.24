@@ -1,12 +1,20 @@
 const Input = ({
+    className,
     type = "text",
     placeholder = "Your full name",
     ariaLabel = "Your full name",
     value = "",
-    onChange
+    onChange = () => {}
 }) => {
     return (
-        <input type={ type } placeholder={ placeholder } aria-label={ ariaLabel } value={ value } onChange={ onChange } />
+        <input
+            className={ className }
+            type={ type }
+            placeholder={ placeholder }
+            aria-label={ ariaLabel }
+            value={ value }
+            onChange={ onChange }
+        />
     );
 }
 
