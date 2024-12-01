@@ -1,14 +1,17 @@
 import Version from "./Version.jsx";
-import Button from "./Button.jsx";
 import Input from "./Input.jsx";
+import { NavLink } from "react-router";
 
-const Header = ({ cart }) => {
-    const { changeShowCart } = cart;
+const Header = () => {
     return (
         <header>
-            <div className={"logo"}>PIZZA DAY</div>
+            <div className={"logo"}>
+                <NavLink to={"/"} className={"header-link"} >PIZZA DAY</NavLink>
+                <NavLink to={"/menu"} className={"header-link"} >MENU</NavLink>
+                <NavLink to={"/cart"} className={"header-link"} >CART</NavLink>
+            </div>
             <Input type={"text"} className={"search-bar"} placeholder={"Search for the order #"} />
-            <div onClick={ changeShowCart } className={"username"} style={ {cursor: "pointer"} } title={"Cart"}>ALEXPROGER</div>
+            <div className={"username"} >ALEXPROGER</div>
             <Version />
         </header>
     );

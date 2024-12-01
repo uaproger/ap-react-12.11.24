@@ -1,6 +1,6 @@
-import Form from "./Form.jsx";
+import Form from "../components/Form.jsx";
 
-const Home = () => {
+const Main = () => {
     return (
         <main>
             <h1>The best pizza.</h1>
@@ -11,4 +11,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Main;
