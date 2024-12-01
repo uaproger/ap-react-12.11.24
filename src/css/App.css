@@ -35,6 +35,16 @@ header {
     font-family: monospace;
     font-size: 1.25rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.header-link {
+    text-decoration: none;
+    color: #000000;
+}
+.header-link.active {
+    color: #4A90E2;
 }
 main {
     flex: 1;
@@ -93,4 +103,7 @@ input {
 }
 .username {
     font-weight: bold;
+}
+.not-found {
+    width: 30%;
 }
