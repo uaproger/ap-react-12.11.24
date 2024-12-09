@@ -1,5 +1,5 @@
 import { setPrice, ucfirst } from "../../helpers/helper.js";
-import Image from "../Image.jsx";
+import Image from "../../components/Image.jsx";
 import CartControls from "./CartControls.jsx";
 import { useState } from "react";
 

@@ -1,12 +1,13 @@
+import CartItem from "./CartItem.jsx";
+import Button from "../../components/Button.jsx";
 import "./Cart.css";
 import { cartItems } from "../../config/data.js";
-import CartItem from "./CartItem.jsx";
-import Button from "../Button.jsx";
+import { NavLink } from "react-router";
 
-const Cart = ({ setShowCart }) => {
+const Cart = () => {
     return (
         <div className="cart-container">
-            <a href="#" onClick={ () => setShowCart(false) } className="back-link">← Back to menu</a>
+            <NavLink to="/menu" className="back-link">← Back to menu</NavLink>
             <h1 className="cart-title">Your cart, AlexProger</h1>
 
             <div className="cart-items">

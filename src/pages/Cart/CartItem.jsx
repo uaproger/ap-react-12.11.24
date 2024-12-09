@@ -1,5 +1,5 @@
 import { setPrice, ucfirst } from "../../helpers/helper.js";
-import Button from "../Button.jsx";
+import Button from "../../components/Button.jsx";
 
 const CartItem = ({ cart }) => {
     const { id, name, price, quantity } = cart;

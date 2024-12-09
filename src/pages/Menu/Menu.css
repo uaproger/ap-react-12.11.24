@@ -17,6 +17,15 @@
     object-fit: cover;
     border-radius: 8px;
 }
+.pizza-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 4rem;
+    height: 4rem;
+    transform: translate(-50%, -45%);
+    animation: loader 2s linear infinite;
+}
 .pizza-info h2 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
@@ -59,4 +68,13 @@
 .counter span {
     margin: 0 0.5rem;
     font-weight: bold;
+}
+
+@keyframes loader {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
