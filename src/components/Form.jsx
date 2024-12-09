@@ -1,21 +1,47 @@
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
-import { useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router";
+import { UserContext } from "../contexts/UserProvider.jsx";
+import { api } from "../config/api.js";
+import {GUID, setCookie} from "../helpers/helper.js";
 
 const Form = () => {
     const navigate = useNavigate();
 
-    const [userName, setUserName] = useState("");
+    const { userName, setUserName } = useContext(UserContext);
 
     const changeUserName = (event) => {
         setUserName(event.target.value);
     }
 
-    const showUserName = (event) => {
+    const showUserName = async (event) => {
         event.preventDefault();
         if (userName === "" || userName.length < 2) return;
-        navigate("/menu");
+        try {
+            const token = GUID();
+
+            const response = await fetch(api.users, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: userName,
+                    token: token
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Помилка HTTP! статус: ${response.status}`);
+            }
+
+            setCookie('token', token, 365);
+
+            navigate("/menu");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (

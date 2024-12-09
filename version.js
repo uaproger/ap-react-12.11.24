@@ -25,4 +25,4 @@ const newVersion = incrementVersion(version); // Отримуємо нову в�
 // Оновлюємо package.json з новою версією
 packageJson.version = newVersion;
 fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 4), 'utf8');
-console.log(`Версію ${newVersion} записано у ./package.json`);
+console.log(`\x1b[1m \x1b[32m \nВерсію \x1b[31m ${newVersion} \x1b[32m записано у \x1b[34m ./package.json\n \x1b[0m`);

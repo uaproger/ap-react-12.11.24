@@ -1,8 +1,13 @@
 import Version from "./Version.jsx";
 import Input from "./Input.jsx";
 import { NavLink } from "react-router";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserProvider.jsx";
 
 const Header = () => {
+
+    const { userName } = useContext(UserContext);
+
     return (
         <header>
             <div className={"logo"}>
@@ -11,7 +16,7 @@ const Header = () => {
                 <NavLink to={"/cart"} className={"header-link"} >CART</NavLink>
             </div>
             <Input type={"text"} className={"search-bar"} placeholder={"Search for the order #"} />
-            <div className={"username"} >ALEXPROGER</div>
+            <div className={"username"} >{userName.toUpperCase()}</div>
             <Version />
         </header>
     );
