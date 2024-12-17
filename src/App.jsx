@@ -4,6 +4,7 @@ import Menu from "./pages/Menu/Menu.jsx";
 import Cart from "./pages/Cart/Cart.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { BrowserRouter, Route, Routes } from "react-router";
+import OrderForm from "./pages/OrderForm/OrderForm.jsx";
 
 const App = () => {
     return (
@@ -11,11 +12,12 @@ const App = () => {
             <div className="container">
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/menu" element={<Menu />} />
-                    <Route path="/cart" element={<Cart />} />
+                    <Route path={ "/" } element={ <Main /> } />
+                    <Route path={ "/menu" } element={ <Menu /> } />
+                    <Route path={ "/cart" } element={ <Cart /> } />
+                    <Route path={ "/order/form" } element={ <OrderForm /> } />
 
-                    <Route path={"*"} element={<NotFound />} />
+                    <Route path={ "*" } element={ <NotFound /> } />
                 </Routes>
             </div>
         </BrowserRouter>

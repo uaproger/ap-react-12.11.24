@@ -15,7 +15,9 @@ const Cart = () => {
             </div>
 
             <div className="cart-actions">
-                <Button className={"order-btn"} text={"Order pizzas"} />
+                <Button className={"order-btn"} text={
+                    <NavLink to={"/order/form"} className={ "btn-order-form" }>Order pizzas</NavLink>
+                } />
                 <Button className={"clear-btn"} text={"Clear cart"} />
             </div>
         </div>

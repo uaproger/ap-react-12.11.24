@@ -4,7 +4,9 @@ const Input = ({
     placeholder = "Your full name",
     ariaLabel = "Your full name",
     value = "",
-    onChange = () => {}
+    onChange = () => {},
+    readOnly,
+    required
 }) => {
     return (
         <input
@@ -14,6 +16,8 @@ const Input = ({
             aria-label={ ariaLabel }
             value={ value }
             onChange={ onChange }
+            readOnly={ readOnly ?? false }
+            required={ required ?? false }
         />
     );
 }

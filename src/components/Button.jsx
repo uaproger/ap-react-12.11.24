@@ -1,6 +1,19 @@
-const Button = ({ text, className, onClick, ariaLabel }) => {
+const Button = (props) => {
+    const {
+        type,
+        text,
+        className,
+        onClick,
+        ariaLabel
+    } = props;
+
     return (
-        <button onClick={onClick} className={ className } aria-label={ariaLabel}>{ text }</button>
+        <button
+            type={ type }
+            onClick={ onClick }
+            className={ className }
+            aria-label={ ariaLabel }
+        >{ text }</button>
     );
 }
 
