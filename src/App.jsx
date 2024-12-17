@@ -5,17 +5,19 @@ import Cart from "./pages/Cart/Cart.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import OrderForm from "./pages/OrderForm/OrderForm.jsx";
+import OrderStatus from "./pages/OrderStatus/OrderStatus.jsx";
 
 const App = () => {
     return (
         <BrowserRouter>
-            <div className="container">
+            <div className={ "container" }>
                 <Header />
                 <Routes>
                     <Route path={ "/" } element={ <Main /> } />
                     <Route path={ "/menu" } element={ <Menu /> } />
                     <Route path={ "/cart" } element={ <Cart /> } />
                     <Route path={ "/order/form" } element={ <OrderForm /> } />
+                    <Route path={ "/orders/:id" } element={ <OrderStatus /> } />
 
                     <Route path={ "*" } element={ <NotFound /> } />
                 </Routes>
