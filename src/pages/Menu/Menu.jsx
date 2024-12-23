@@ -4,7 +4,7 @@ import "./Menu.css";
 import { useEffect, useState } from "react";
 import { api } from "../../config/api.js";
 
-const Menu = () => {
+const Menu = ({ onIncrease, onDecrease, onAdd, onDelete }) => {
     const [pizzas, setPizzas] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -43,7 +43,14 @@ const Menu = () => {
                 )
                 : pizzas.length > 0
                     ? (
-                        pizzas.map((pizza) => <ItemMenu key={pizza.id} pizza={pizza} />)
+                        pizzas.map((pizza) => <ItemMenu
+                            key={ pizza.id }
+                            pizza={ pizza }
+                            onIncrease={ onIncrease }
+                            onDecrease={ onDecrease }
+                            onAdd={ onAdd }
+                            onDelete={ onDelete }
+                        />)
                     )
                     : (
                         <p>No pizzas available.</p>

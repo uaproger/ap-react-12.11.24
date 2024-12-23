@@ -1,9 +1,17 @@
-import {createContext, useEffect, useState} from "react";
-import {api} from "../config/api.js";
-import {getCookie} from "../helpers/helper.js";
+import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../config/api.js";
+import { getCookie } from "../helpers/helper.js";
 
-export const UserContext = createContext(null);
+const UserContext = createContext(null);
 UserContext.displayName = "UserProvider";
+
+export const useUser = () => {
+    const context = useContext(UserContext);
+    if (!context) {
+        throw new Error("useCart must be used within a CartProvider");
+    }
+    return context;
+}
 
 const UserProvider = ({ children }) => {
     const [userName, setUserName] = useState("");
