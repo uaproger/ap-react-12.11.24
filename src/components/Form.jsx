@@ -6,7 +6,8 @@ const Form = (props) => {
         encType,
         target,
         noValidate,
-        children
+        children,
+        onSubmit
     } = props;
 
     return (
@@ -17,6 +18,7 @@ const Form = (props) => {
             encType={ encType }
             target={ target }
             noValidate={ noValidate }
+            onSubmit={ onSubmit }
         >{ children }</form>
     );
 }

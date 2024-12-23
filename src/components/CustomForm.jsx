@@ -28,7 +28,8 @@ const CustomForm = () => {
         setUserName(event.target.value);
     }
 
-    const showUserName = async () => {
+    const showUserName = (event) => {
+        event.preventDefault();
         navigate("/menu");
         form.reset();
     }
