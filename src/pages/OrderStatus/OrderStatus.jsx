@@ -1,14 +1,20 @@
 import "./OrderStatus.css";
 import Button from "../../components/Button.jsx";
+import { useLocation } from "react-router";
+import {isEmpty, setPrice} from "../../helpers/helper.js";
 
 const OrderStatus = () => {
+    const location = useLocation();
+    const orderDetails = location.state?.orderDetails;
+    console.log(orderDetails); // TODO: прибрати після дебагу
+
     return (
         <div className="container-order-status">
             <div className="header-order-status">
-                <h1 className="order-title">Order #5T460L status: preparing</h1>
+                <h1 className="order-title">Order #{orderDetails.id} status: preparing</h1>
                 <div className="badges">
-                    <Button className={ "badge badge-priority" } text={ "PRIORITY" } />
-                    <Button className={ "badge badge-preparing" } text={ "PREPARING ORDER" } />
+                    {orderDetails.priority && <span className={"badge badge-priority"}>PRIORITY</span>}
+                    <span className={"badge badge-preparing" } >PREPARING ORDER</span>
                 </div>
             </div>
 
@@ -18,27 +24,33 @@ const OrderStatus = () => {
             </div>
 
             <div className="order-details">
-                <div className="pizza-item">
-                    <div className="pizza-header">
-                        <span className="pizza-name">1× Margherita</span>
-                        <span className="pizza-price">€12.00</span>
+                {orderDetails.cart.map((item, index) => (
+                    <div key={ item.pizzaId } className="pizza-item">
+                        <div className="pizza-header">
+                            <span className="pizza-name">{ index + 1 }× { item.name }</span>
+                            <span className="pizza-price">{ setPrice(item.unitPrice) }</span>
+                        </div>
+                        <div className={ "pizza-name" }>Quantity: {item.quantity}</div>
+                        <div className={ "pizza-price" }>Sum: { setPrice(item.totalPrice) }</div>
+                        {!isEmpty(item.addIngredients) && <div className={"ingredients"}>{ item.addIngredients.join(" ") }</div>}
                     </div>
-                    <div className="ingredients">Tomato, Mozzarella, Basil</div>
-                </div>
+                ))}
             </div>
 
-            <div className="price-breakdown">
-                <div className="price-item">
-                    <span className="price-label">Price pizza:</span>
-                    <span className="price-value">€12.00</span>
+            <div className={ "price-breakdown" }>
+                <div className={ "price-item" }>
+                    <span className={ "price-label" }>Price pizza:</span>
+                    <span className={ "price-value" }>{ setPrice(orderDetails.orderPrice) }</span>
                 </div>
-                <div className="price-item">
-                    <span className="price-label">Price priority:</span>
-                    <span className="price-value">€2.00</span>
-                </div>
-                <div className="price-item">
-                    <span className="price-label">To pay on delivery:</span>
-                    <span className="price-value">€14.00</span>
+                {orderDetails.priority && (
+                    <div className={ "price-item" }>
+                        <span className={ "price-label" }>Price priority:</span>
+                        <span className={ "price-value" }>{ setPrice(2) }</span>
+                    </div>
+                )}
+                <div className={ "price-item" }>
+                    <span className={ "price-label" }>To pay on delivery:</span>
+                    <span className={ "price-value" }>{ setPrice(orderDetails.orderPrice + (orderDetails.priority ? 2 : 0)) }</span>
                 </div>
             </div>
         </div>

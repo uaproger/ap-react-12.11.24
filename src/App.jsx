@@ -53,7 +53,7 @@ const App = () => {
                         onDelete={ deleteItem }
                     /> } />
                     <Route path={ "/order/form" } element={ <OrderForm /> } />
-                    <Route path={ "/orders/:id" } element={ <OrderStatus /> } />
+                    <Route path={ "/order/:id" } element={ <OrderStatus /> } />
 
                     <Route path={ "*" } element={ <NotFound /> } />
                 </Routes>

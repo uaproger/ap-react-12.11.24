@@ -9,11 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useCart } from "../../contexts/CartProvider.jsx";
 import { setPrice } from "../../helpers/helper.js";
+import { api } from "../../config/api.js";
+import { useNavigate } from "react-router";
 
 const OrderForm = () => {
     const { userName } = useUser();
 
     const { state } = useCart();
+
+    const navigator = useNavigate();
 
     const schema = z.object({
         firstName: z.string().min(2),
@@ -33,8 +37,47 @@ const OrderForm = () => {
         resolver: zodResolver(schema)
     });
 
-    const submit = () => {
-        console.log("verify");
+    const submit = async (event) => {
+        try {
+            const response = await fetch(api.order, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    address: form.getValues("address"),
+                    customer: form.getValues("firstName"),
+                    phone: form.getValues("phone"),
+                    priority: !!form.getValues("priority"),
+                    position: "",
+                    cart: [
+                        ...state.items.map(item => {
+                            return {
+                                pizzaId: item.id,
+                                name: item.name,
+                                quantity: item.quantity,
+                                totalPrice: (item.quantity * item.unitPrice),
+                                unitPrice: item.unitPrice
+                            }
+                        })
+                    ]
+                })
+            });
+            if (!response.ok) {
+                throw new Error(`Помилка HTTP! статус: ${response.status}`);
+            }
+            const data = await response.json();
+            if (data.status === "success") {
+                navigator(`/order/${data.data.id}`, {
+                    state: { orderDetails: data.data },
+                });
+            }
+        } catch (error) {
+            event.preventDefault();
+            console.error(error);
+        }
+        form.reset();
     }
 
     return (
@@ -86,7 +129,7 @@ const OrderForm = () => {
                         </div>
                     </div>
 
-                    <Button type={ "submit" } disabled={ !form.formState.isValid } className={ "order-btn" } text={ "Order now for " + setPrice(state.totalPrice) } />
+                    <Button disabled={ !form.formState.isValid } className={ "order-btn" } text={ "Order now for " + setPrice(state.totalPrice) } />
                 </Form>
             </FormProvider>
         </div>
