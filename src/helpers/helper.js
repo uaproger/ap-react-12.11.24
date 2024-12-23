@@ -36,4 +36,23 @@ const getCookie = (name) => {
     return null;
 }
 
-export { ucfirst, setPrice, GUID, setCookie, getCookie };
+const isEmpty = (variable) => {
+    if (variable === undefined || variable === null) {
+        return true;
+    }
+    if (typeof variable === 'string' && variable.trim() === '') {
+        return true;
+    }
+    if (Array.isArray(variable) && variable.length === 0) {
+        return true;
+    }
+    if (typeof variable === 'object' && !Array.isArray(variable) && Object.keys(variable).length === 0) {
+        return true;
+    }
+    if (typeof variable === 'number' && variable === 0) {
+        return false;
+    }
+    return !variable;
+}
+
+export { ucfirst, setPrice, GUID, setCookie, getCookie, isEmpty };

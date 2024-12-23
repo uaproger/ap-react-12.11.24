@@ -2,7 +2,7 @@ import Input from "./Input.jsx";
 import Button from "./Button.jsx";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { UserContext } from "../contexts/UserProvider.jsx";
+import { useUser } from "../contexts/UserProvider.jsx";
 import { api } from "../config/api.js";
 import { GUID, setCookie } from "../helpers/helper.js";
 import Form from "./Form.jsx";
@@ -10,7 +10,7 @@ import Form from "./Form.jsx";
 const CustomForm = () => {
     const navigate = useNavigate();
 
-    const { userName, setUserName } = useContext(UserContext);
+    const { userName, setUserName } = useUser();
 
     const changeUserName = (event) => {
         setUserName(event.target.value);

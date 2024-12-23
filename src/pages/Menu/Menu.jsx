@@ -3,8 +3,15 @@ import Image from "../../components/Image.jsx";
 import "./Menu.css";
 import { useEffect, useState } from "react";
 import { api } from "../../config/api.js";
+import { useCart } from "../../contexts/CartProvider.jsx";
 
 const Menu = () => {
+    const {
+        increasingNumberPizzas,
+        decreasingNumberPizzas,
+        showNumberPizzas,
+        deleteItem
+    } = useCart();
     const [pizzas, setPizzas] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -43,7 +50,14 @@ const Menu = () => {
                 )
                 : pizzas.length > 0
                     ? (
-                        pizzas.map((pizza) => <ItemMenu key={pizza.id} pizza={pizza} />)
+                        pizzas.map((pizza) => <ItemMenu
+                            key={ pizza.id }
+                            pizza={ pizza }
+                            onIncrease={ increasingNumberPizzas }
+                            onDecrease={ decreasingNumberPizzas }
+                            onAdd={ showNumberPizzas }
+                            onDelete={ deleteItem }
+                        />)
                     )
                     : (
                         <p>No pizzas available.</p>

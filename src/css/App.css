@@ -24,24 +24,37 @@ body, html {
     flex-direction: column;
     min-height: 100%;
 }
-header {
+header, footer {
     background-color: #FDB913;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 4rem);
+    color: #ffffff;
+    background-color: #000000;
+}
 .logo {
     font-family: monospace;
     font-size: 1.25rem;
     font-weight: bold;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 2rem;
 }
-.header-link {
+.header-link, .footer-link {
     text-decoration: none;
     color: #000000;
+}
+.footer-link {
+    font-weight: bold;
+    color: #ffffff;
 }
 .header-link.active {
     color: #4A90E2;
@@ -106,4 +119,7 @@ input {
 }
 .not-found {
     width: 30%;
+}
+.text-lg {
+    font-size: 1.125rem;
 }
