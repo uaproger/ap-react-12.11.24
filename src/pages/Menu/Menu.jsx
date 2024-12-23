@@ -3,34 +3,26 @@ import Image from "../../components/Image.jsx";
 import "./Menu.css";
 import { useEffect, useState } from "react";
 import { api } from "../../config/api.js";
+import useFetch from "../../hooks/useFetch.jsx";
 
 const Menu = ({ onIncrease, onDecrease, onAdd, onDelete }) => {
     const [pizzas, setPizzas] = useState([]);
 
-    const [loading, setLoading] = useState(true);
+    const { data, error, isLoading } = useFetch(api.pizzas);
 
     useEffect(() => {
-        const getPizzas = async () => {
-            try {
-                const res = await fetch(api.pizzas);
-                if (!res.ok) {
-                    throw new Error(`Помилка HTTP! статус: ${res.status}`);
-                }
-                const data = await res.json();
-                setPizzas(data.data);
-            } catch (error) {
-                console.error("Помилка отримання піци: ", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+        if (data?.data) {
+            setPizzas(data.data);
+        }
+    }, [data]);
 
-        getPizzas();
-    }, []);
+    if (error) {
+        console.error(error);
+    }
 
     return (
         <div className="menu-container">
-            {loading
+            {isLoading
                 ? (
                     <p>
                         <span>Loading pizzas...</span>
