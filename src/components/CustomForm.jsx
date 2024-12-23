@@ -1,55 +1,55 @@
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
-import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { useUser } from "../contexts/UserProvider.jsx";
-import { api } from "../config/api.js";
-import { GUID, setCookie } from "../helpers/helper.js";
 import Form from "./Form.jsx";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const CustomForm = () => {
     const navigate = useNavigate();
 
     const { userName, setUserName } = useUser();
 
+    const schema = z.object({
+        userName: z.string().min(2, { message: "Name must have at least 2 characters" }),
+    });
+
+    const form = useForm({
+        mode: "onBlur",
+        defaultValues: {
+            userName: ""
+        },
+        resolver: zodResolver(schema)
+    });
+
     const changeUserName = (event) => {
         setUserName(event.target.value);
     }
 
-    const showUserName = async (event) => {
-        event.preventDefault();
-        if (userName === "" || userName.length < 2) return;
-        try {
-            const token = GUID();
-
-            const response = await fetch(api.users, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: userName,
-                    token: token
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error(`Помилка HTTP! статус: ${response.status}`);
-            }
-
-            setCookie('token', token, 365);
-
-            navigate("/menu");
-        } catch (error) {
-            console.error(error);
-        }
+    const showUserName = async () => {
+        navigate("/menu");
+        form.reset();
     }
 
     return (
-        <Form action={ "/" } method={ "post" } className={ "form" }>
-            <Input onChange={ changeUserName } type={"text"} placeholder={"Ваше ім'я"} ariaLabel={"Ваше ім'я"} value={ userName } />
-            <Button onClick={ showUserName } text={"Start Order"} className={"btn"} />
-        </Form>
+        <FormProvider {...form}>
+            <Form onSubmit={ form.handleSubmit(showUserName) }>
+                <div>
+                    <Input
+                        onChange={ changeUserName }
+                        type={ "text" }
+                        placeholder={ "Your name" }
+                        ariaLabel={ "Your name" }
+                        name={ "userName" }
+                        control={ form.control }
+                    />
+                    {form.formState.errors.userName && <p style={{fontSize: "12px"}}>{form.formState.errors.userName.message}</p>}
+                </div>
+                <Button onClick={ showUserName } disabled={ !form.formState.isValid } text={"Start Order"} className={"btn"} />
+            </Form>
+        </FormProvider>
     );
 }
 

@@ -1,23 +1,26 @@
+import { useController } from "react-hook-form";
+
 const Input = ({
     className,
     type = "text",
-    placeholder = "Your full name",
-    ariaLabel = "Your full name",
-    value = "",
-    onChange = () => {},
-    readOnly,
-    required
+    placeholder = "Your name",
+    ariaLabel = "Your name",
+    name,
+    control
 }) => {
+    if (!control) {
+        return null;
+    }
+
+    const { field } = useController({ name, control });
+
     return (
         <input
             className={ className }
             type={ type }
             placeholder={ placeholder }
             aria-label={ ariaLabel }
-            value={ value }
-            onChange={ onChange }
-            readOnly={ readOnly ?? false }
-            required={ required ?? false }
+            {...field}
         />
     );
 }
