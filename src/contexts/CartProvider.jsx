@@ -97,8 +97,32 @@ const initialState = {
 const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, initialState);
 
+    const increasingNumberPizzas = (id) => {
+        dispatch({ type: "INCREMENT", payload: { id } });
+    }
+
+    const decreasingNumberPizzas = (id) => {
+        dispatch({ type: "DECREMENT", payload: { id } });
+    }
+
+    const showNumberPizzas = (pizza, qty) => {
+        dispatch({
+            type: "ADD_ITEM",
+            payload: {
+                item: pizza,
+                qty,
+            },
+        });
+    }
+
+    const deleteItem = (id) => {
+        dispatch({ type: "DELETE_ITEM", payload: { id } });
+    }
+
     return (
-        <CartContext.Provider value={{ state, dispatch }}>{ children }</CartContext.Provider>
+        <CartContext.Provider value={{ state, dispatch, increasingNumberPizzas, decreasingNumberPizzas, showNumberPizzas, deleteItem }}>
+            { children }
+        </CartContext.Provider>
     );
 }
 

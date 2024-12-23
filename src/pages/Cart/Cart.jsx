@@ -6,10 +6,16 @@ import { useUser } from "../../contexts/UserProvider.jsx";
 import { useCart } from "../../contexts/CartProvider.jsx";
 import { useEffect } from "react";
 
-const Cart = ({ onIncrease, onDecrease, onDelete }) => {
+const Cart = () => {
     const { userName } = useUser();
 
-    const { state, dispatch } = useCart();
+    const {
+        state,
+        dispatch,
+        increasingNumberPizzas,
+        decreasingNumberPizzas,
+        deleteItem
+    } = useCart();
 
     const navigate = useNavigate();
 
@@ -29,9 +35,9 @@ const Cart = ({ onIncrease, onDecrease, onDelete }) => {
                     key={ item.id }
                     item={ item }
                     index={ index }
-                    onIncrease={ onIncrease }
-                    onDecrease={ onDecrease }
-                    onDelete={ onDelete }
+                    onIncrease={ increasingNumberPizzas }
+                    onDecrease={ decreasingNumberPizzas }
+                    onDelete={ deleteItem }
                 />))}
             </div>
 
