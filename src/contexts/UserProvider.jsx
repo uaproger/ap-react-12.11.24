@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../config/api.js";
 import { getCookie } from "../helpers/helper.js";
+import useFetch from "../hooks/useFetch.jsx";
 
 const UserContext = createContext(null);
 UserContext.displayName = "UserProvider";
@@ -16,25 +17,16 @@ export const useUser = () => {
 const UserProvider = ({ children }) => {
     const [userName, setUserName] = useState("");
 
+    const { data, error } = useFetch(api.users + '?token=' + getCookie("token"));
     useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await fetch(api.users + '?token=' + getCookie("token"));
-
-                if (!res.ok) {
-                    throw new Error(`Помилка HTTP! статус: ${res.status}`);
-                }
-
-                const data = await res.json();
-
-                setUserName(data[0].name);
-            } catch (error) {
-                console.error("Помилка отримання користувача: ", error);
-            }
+        if (data && data[0] && data[0].name) {
+            setUserName(data[0].name);
         }
+    }, [data]);
 
-        getUser();
-    })
+    if (error) {
+        console.error(error);
+    }
 
     return <UserContext.Provider value={{ userName, setUserName }}>{ children }</UserContext.Provider>;
 }
