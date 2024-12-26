@@ -52,14 +52,11 @@ const App = () => {
                         </Suspense>
                     } />
 
-                    <Route
-                        path={"*"}
-                        element={
-                            <Suspense fallback={ loading }>
-                                <NotFoundPage />
-                            </Suspense>
-                        }
-                    />
+                    <Route path={"*"} element={
+                        <Suspense fallback={ loading }>
+                            <NotFoundPage />
+                        </Suspense>
+                    }/>
                 </Routes>
                 {!isEmpty(state.items) && <Footer state={state}/>}
             </div>
