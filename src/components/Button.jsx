@@ -4,7 +4,8 @@ const Button = (props) => {
         text,
         className,
         onClick,
-        ariaLabel
+        ariaLabel,
+        disabled = false
     } = props;
 
     return (
@@ -13,6 +14,7 @@ const Button = (props) => {
             onClick={ onClick }
             className={ className }
             aria-label={ ariaLabel }
+            disabled={ disabled }
         >{ text }</button>
     );
 }
