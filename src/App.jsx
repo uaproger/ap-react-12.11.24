@@ -11,29 +11,7 @@ import { useCart } from "./contexts/CartProvider.jsx";
 import { isEmpty } from "./helpers/helper.js";
 
 const App = () => {
-    const { state, dispatch } = useCart();
-
-    const increasingNumberPizzas = (id) => {
-        dispatch({ type: "INCREMENT", payload: { id } });
-    }
-
-    const decreasingNumberPizzas = (id) => {
-        dispatch({ type: "DECREMENT", payload: { id } });
-    }
-
-    const showNumberPizzas = (pizza, qty) => {
-        dispatch({
-            type: "ADD_ITEM",
-            payload: {
-                item: pizza,
-                qty,
-            },
-        });
-    }
-
-    const deleteItem = (id) => {
-        dispatch({ type: "DELETE_ITEM", payload: { id } });
-    }
+    const { state } = useCart();
 
     return (
         <BrowserRouter>
@@ -41,17 +19,8 @@ const App = () => {
                 <Header />
                 <Routes>
                     <Route path={ "/" } element={ <Main /> } />
-                    <Route path={ "/menu" } element={ <Menu
-                        onIncrease={ increasingNumberPizzas }
-                        onDecrease={ decreasingNumberPizzas }
-                        onAdd={ showNumberPizzas }
-                        onDelete={ deleteItem }
-                    /> } />
-                    <Route path={ "/cart" } element={ <Cart
-                        onIncrease={ increasingNumberPizzas }
-                        onDecrease={ decreasingNumberPizzas }
-                        onDelete={ deleteItem }
-                    /> } />
+                    <Route path={ "/menu" } element={ <Menu /> } />
+                    <Route path={ "/cart" } element={ <Cart /> } />
                     <Route path={ "/order/form" } element={ <OrderForm /> } />
                     <Route path={ "/order/:id" } element={ <OrderStatus /> } />
 

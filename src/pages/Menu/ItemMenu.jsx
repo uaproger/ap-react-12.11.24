@@ -1,7 +1,7 @@
 import { setPrice, ucfirst } from "../../helpers/helper.js";
 import Image from "../../components/Image.jsx";
 import CartControls from "./CartControls.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCart } from "../../contexts/CartProvider.jsx";
 
 const ItemMenu = ({ pizza, onIncrease, onDecrease, onAdd, onDelete }) => {
@@ -9,19 +9,11 @@ const ItemMenu = ({ pizza, onIncrease, onDecrease, onAdd, onDelete }) => {
 
     const { imageUrl, name, ingredients, unitPrice, soldOut, id } = pizza;
 
-    const [isCounter, setIsCounter] = useState(false);
+    const cartItem = state.items.find(item => item.id === id);
 
-    const [counter, setCounter] = useState(1);
+    const [isCounter, setIsCounter] = useState(!!cartItem);
 
-    useEffect(() => {
-        const setCounterAndIsCounter = () => {
-            state.items.forEach(item => {
-                setIsCounter(id === item.id);
-                setCounter(item.quantity);
-            });
-        }
-        setCounterAndIsCounter();
-    }, []);
+    const [counter, setCounter] = useState(cartItem?.quantity || 1);
 
     const handleIncrease = (event) => {
         event.preventDefault();

@@ -4,8 +4,15 @@ import "./Menu.css";
 import { useEffect, useState } from "react";
 import { api } from "../../config/api.js";
 import useFetch from "../../hooks/useFetch.jsx";
+import { useCart } from "../../contexts/CartProvider.jsx";
 
-const Menu = ({ onIncrease, onDecrease, onAdd, onDelete }) => {
+const Menu = () => {
+    const {
+        increasingNumberPizzas,
+        decreasingNumberPizzas,
+        showNumberPizzas,
+        deleteItem
+    } = useCart();
     const [pizzas, setPizzas] = useState([]);
 
     const { data, error, isLoading } = useFetch(api.pizzas);
@@ -38,10 +45,10 @@ const Menu = ({ onIncrease, onDecrease, onAdd, onDelete }) => {
                         pizzas.map((pizza) => <ItemMenu
                             key={ pizza.id }
                             pizza={ pizza }
-                            onIncrease={ onIncrease }
-                            onDecrease={ onDecrease }
-                            onAdd={ onAdd }
-                            onDelete={ onDelete }
+                            onIncrease={ increasingNumberPizzas }
+                            onDecrease={ decreasingNumberPizzas }
+                            onAdd={ showNumberPizzas }
+                            onDelete={ deleteItem }
                         />)
                     )
                     : (
