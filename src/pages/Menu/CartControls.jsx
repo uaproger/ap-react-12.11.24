@@ -7,17 +7,27 @@ const CartControls = ({ params }) => {
         showNumberPizzas,
         decreasingNumberPizzas,
         increasingNumberPizzas,
+        deleteItem
     } = params;
 
     return (
-        <div className="cart-controls">
+        <div className={ "cart-controls" }>
             {!isCounter
-                ? (<Button onClick={ showNumberPizzas } className={"add-to-cart"} text={"ADD TO CART"}/>)
+                ? (<Button onClick={ showNumberPizzas } className={ "add-to-cart" } text={ "ADD TO CART" }/>)
                 : (
-                    <div className="counter">
-                        <Button onClick={ decreasingNumberPizzas } className={"decrement"} ariaLabel={"Decrease quantity"} text={"-"} />
-                        <span>{ counter }</span>
-                        <Button onClick={ increasingNumberPizzas } className={"increment"} ariaLabel={"Increase quantity"} text={"+"} />
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        columnGap: "1rem"
+                    }}>
+                        <div className="counter">
+                            <Button onClick={ decreasingNumberPizzas } className={ "decrement" }
+                                    ariaLabel={ "Decrease quantity" } text={ "-" }/>
+                            <span>{ counter }</span>
+                            <Button onClick={ increasingNumberPizzas} className={ "increment" }
+                                    ariaLabel={ "Increase quantity" } text={ "+" }/>
+                        </div>
+                        <Button onClick={ deleteItem } className={ "add-to-cart" } text={ "DELETE" }/>
                     </div>
                 )
             }

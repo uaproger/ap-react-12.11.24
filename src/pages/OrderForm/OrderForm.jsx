@@ -1,13 +1,13 @@
 import "./OrderForm.css";
 import Form from "../../components/Form.jsx";
-import { UserContext } from "../../contexts/UserProvider.jsx";
+import { useUser } from "../../contexts/UserProvider.jsx";
 import { useContext } from "react";
 import Input from "../../components/Input.jsx";
 import Button from "../../components/Button.jsx";
 import Label from "../../components/Label.jsx";
 
 const OrderForm = () => {
-    const { userName } = useContext(UserContext);
+    const { userName } = useUser();
 
     return (
         <div className={ "container-order-form" }>
